@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Submit Expense — HITECH{% endblock %}
+{% block page_title %}New Expense{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-xl-6 col-lg-7">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h4 class="mb-3">Manual Expense Entry</h4>
+        <p class="text-muted">Enter the expense details below. Your submission will be sent for approval.</p>
+        <form method="post" action="{{ url_for('submission_form.submit_expense') }}">
+          <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input type="number" step="0.01" name="amount" class="form-control" placeholder="Enter amount" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" rows="4" class="form-control" placeholder="Describe the expense" required></textarea>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <button type="submit" name="action" value="submit" class="btn btn-primary">Submit Expense</button>
+              <button type="submit" name="action" value="draft" class="btn btn-outline-secondary ms-2">Save Draft</button>
+            </div>
+            <a href="{{ url_for('drafts_view.view_drafts') }}" class="btn btn-outline-secondary">View Drafts</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

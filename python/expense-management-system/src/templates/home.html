@@ -1,0 +1,61 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Dashboard — HITECH{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row gx-4 gy-4">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div>
+            <h2 class="h4 mb-1">Welcome to HITECH</h2>
+            <p class="text-muted mb-0">Submit expenses, track approvals and review your expense history from one streamlined experience.</p>
+          </div>
+          <a href="{{ url_for('submission_form.submit_expense') }}" class="btn btn-primary">New Expense</a>
+        </div>
+        <div class="row g-3">
+          <div class="col-sm-4">
+            <div class="card p-3 bg-light border-0">
+              <div class="text-uppercase small text-muted">Total Expenses</div>
+              <div class="h3 mb-0">{{ total_expenses }}</div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card p-3 bg-light border-0">
+              <div class="text-uppercase small text-muted">Drafts</div>
+              <div class="h3 mb-0">{{ total_drafts }}</div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card p-3 bg-light border-0">
+              <div class="text-uppercase small text-muted">Pending</div>
+              <div class="h3 mb-0">{{ total_pending }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h5>Ready to submit?</h5>
+        <p class="text-muted">Use the expense form to log receipts, travel costs and reimbursements quickly.</p>
+        <a href="{{ url_for('submission_form.submit_expense') }}" class="btn btn-outline-primary">Submit a New Expense</a>
+      </div>
+    </div>
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="mb-3">Helpful tips</h6>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2">• Fill out all required fields before submitting.</li>
+          <li class="mb-2">• Drafts are saved automatically when you choose Draft.</li>
+          <li>• Track approvals from the Approvals page.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

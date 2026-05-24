@@ -1,0 +1,35 @@
+﻿body {
+  min-height: 100vh;
+  background: #f4f7fb;
+}
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+.app-sidebar {
+  width: 260px;
+  min-height: 100vh;
+}
+.app-sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.25rem;
+}
+.app-sidebar .nav-link.active,
+.app-sidebar .nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+.app-content {
+  flex: 1;
+  background: #f4f7fb;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+}

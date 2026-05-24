@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Payments — HITECH{% endblock %}
+{% block page_title %}Payments{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <h5 class="mb-3">Ready to Pay</h5>
+    {% if expenses %}
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for expense in expenses %}
+              <tr>
+                <td>{{ expense.description }}</td>
+                <td>₹{{ '{:.2f}'.format(expense.amount) }}</td>
+                <td>{{ expense.status }}</td>
+                <td class="text-end">
+                  <form method="post" action="{{ url_for('approver_view.pay_expense', expense_id=expense.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-success">Mark Paid</button>
+                  </form>
+                  {% if role == 'admin' %}
+                    <form method="post" action="{{ url_for('approver_view.reject_expense', expense_id=expense.id) }}" class="d-inline">
+                      <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+                    </form>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="alert alert-secondary">There are no expenses awaiting payment at this time.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Approvals — HITECH{% endblock %}
+{% block page_title %}Approvals{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <h5 class="mb-3">Pending Approvals</h5>
+    {% if expenses %}
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for expense in expenses %}
+              <tr>
+                <td>{{ expense.description }}</td>
+                <td>₹{{ '{:.2f}'.format(expense.amount) }}</td>
+                <td>{{ expense.status }}</td>
+                <td class="text-end">
+                  <form method="post" action="{{ url_for('approver_view.approve_expense', expense_id=expense.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                  </form>
+                  <form method="post" action="{{ url_for('approver_view.reject_expense', expense_id=expense.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="alert alert-secondary">There are no pending approvals at this time.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

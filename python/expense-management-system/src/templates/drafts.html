@@ -1,0 +1,51 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Drafts — HITECH{% endblock %}
+{% block page_title %}Drafts{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h5>Saved Drafts</h5>
+        <p class="text-muted mb-0">Manage expenses that are still in draft status.</p>
+      </div>
+      <a href="{{ url_for('submission_form.submit_expense') }}" class="btn btn-primary">Create Draft</a>
+    </div>
+    {% if drafts %}
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for draft in drafts %}
+              <tr>
+                <td>{{ draft.description }}</td>
+                <td>₹{{ '{:.2f}'.format(draft.amount) }}</td>
+                <td>{{ draft.status }}</td>
+                <td class="text-end">
+                  <form method="post" action="{{ url_for('drafts_view.submit_draft', draft_id=draft.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                  </form>
+                  <form method="post" action="{{ url_for('drafts_view.delete_draft', draft_id=draft.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="alert alert-secondary">No drafts found. Start a new expense to save a draft.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
